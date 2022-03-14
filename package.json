@@ -1,0 +1,22 @@
+{
+    "name": "zhaw-devops",
+    "version": "1.0.0",
+    "description": "DevOps-Course at ZHAW",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/terezazogg/zhaw-devops.git"
+    },
+    "author": "ZHAW",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/terezazogg/zhaw-devops/issues"
+    },
+    "homepage": "https://github.com/terezazogg/zhaw-devops#readme",
+    "dependencies": {
+        "bpmn-js": "^9.0.3"
+    }
+}

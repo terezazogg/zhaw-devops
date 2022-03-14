@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>DevOps: Example with NPM/bpmn-js</title>
+
+        <link rel="stylesheet" href="node_modules/bpmn-js/dist/assets/bpmn-js.css">
+        <link rel="stylesheet" href="node_modules/bpmn-js/dist/assets/diagram-js.css">
+        <link rel="stylesheet" href="node_modules/bpmn-js/dist/assets/bpmn-font/css/bpmn.css">
+
+        <style>
+            html, body, #model {
+                height: 100%;
+                padding: 0;
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="model"></div>
+
+        <script src="node_modules/bpmn-js/dist/bpmn-modeler.production.min.js"></script>
+        <script>
+            var bpmnModeler = new BpmnJS({
+                container: '#model',
+                keyboard: {
+                    bindTo: window
+                }
+            });
+
+            xml = `
+                <?xml version="1.0" encoding="UTF-8"?>
+                <bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0axweto" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="9.0.3">
+                <bpmn:collaboration id="Collaboration_0tk6vdi">
+                <bpmn:participant id="Participant_1e5n7oa" name="ZHAW" processRef="Process_18oehqe" />
+                </bpmn:collaboration>
+                <bpmn:process id="Process_18oehqe" isExecutable="false">
+                <bpmn:startEvent id="Event_1mlap7u" name="NPM installieren">
+                <bpmn:outgoing>Flow_1ctsg3e</bpmn:outgoing>
+                </bpmn:startEvent>
+                <bpmn:task id="Activity_1frlbnf" name="bpmn-js Bibliothek zu NPM hinzufügen">
+                <bpmn:incoming>Flow_1ctsg3e</bpmn:incoming>
+                <bpmn:outgoing>Flow_01ikvj4</bpmn:outgoing>
+                </bpmn:task>
+                <bpmn:task id="Activity_0kru3ep" name="bpmn-js in HTML-Datei inkludieren">
+                <bpmn:incoming>Flow_01ikvj4</bpmn:incoming>
+                <bpmn:outgoing>Flow_0jd5mm4</bpmn:outgoing>
+                </bpmn:task>
+                <bpmn:task id="Activity_18om9gy" name="HTML-Datei im Browser öffnen">
+                <bpmn:incoming>Flow_0jd5mm4</bpmn:incoming>
+                <bpmn:outgoing>Flow_1iyi31s</bpmn:outgoing>
+                </bpmn:task>
+                <bpmn:intermediateThrowEvent id="Event_11urpej" name="Aufgabe erledigt">
+                <bpmn:incoming>Flow_1iyi31s</bpmn:incoming>
+                </bpmn:intermediateThrowEvent>
+                <bpmn:sequenceFlow id="Flow_1ctsg3e" sourceRef="Event_1mlap7u" targetRef="Activity_1frlbnf" />
+                <bpmn:sequenceFlow id="Flow_01ikvj4" sourceRef="Activity_1frlbnf" targetRef="Activity_0kru3ep" />
+                <bpmn:sequenceFlow id="Flow_0jd5mm4" sourceRef="Activity_0kru3ep" targetRef="Activity_18om9gy" />
+                <bpmn:sequenceFlow id="Flow_1iyi31s" sourceRef="Activity_18om9gy" targetRef="Event_11urpej" />
+                </bpmn:process>
+                <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+                <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0tk6vdi">
+                <bpmndi:BPMNShape id="Participant_1e5n7oa_di" bpmnElement="Participant_1e5n7oa" isHorizontal="true">
+                <dc:Bounds x="160" y="80" width="770" height="250" />
+                <bpmndi:BPMNLabel />
+                </bpmndi:BPMNShape>
+                <bpmndi:BPMNEdge id="Flow_1ctsg3e_di" bpmnElement="Flow_1ctsg3e">
+                <di:waypoint x="268" y="200" />
+                <di:waypoint x="330" y="200" />
+                </bpmndi:BPMNEdge>
+                <bpmndi:BPMNEdge id="Flow_01ikvj4_di" bpmnElement="Flow_01ikvj4">
+                <di:waypoint x="430" y="200" />
+                <di:waypoint x="510" y="200" />
+                </bpmndi:BPMNEdge>
+                <bpmndi:BPMNEdge id="Flow_0jd5mm4_di" bpmnElement="Flow_0jd5mm4">
+                <di:waypoint x="610" y="200" />
+                <di:waypoint x="680" y="200" />
+                </bpmndi:BPMNEdge>
+                <bpmndi:BPMNEdge id="Flow_1iyi31s_di" bpmnElement="Flow_1iyi31s">
+                <di:waypoint x="780" y="200" />
+                <di:waypoint x="842" y="200" />
+                </bpmndi:BPMNEdge>
+                <bpmndi:BPMNShape id="Event_1mlap7u_di" bpmnElement="Event_1mlap7u">
+                <dc:Bounds x="232" y="182" width="36" height="36" />
+                <bpmndi:BPMNLabel>
+                <dc:Bounds x="210" y="225" width="81" height="14" />
+                </bpmndi:BPMNLabel>
+                </bpmndi:BPMNShape>
+                <bpmndi:BPMNShape id="Activity_1frlbnf_di" bpmnElement="Activity_1frlbnf">
+                <dc:Bounds x="330" y="160" width="100" height="80" />
+                <bpmndi:BPMNLabel />
+                </bpmndi:BPMNShape>
+                <bpmndi:BPMNShape id="Activity_0kru3ep_di" bpmnElement="Activity_0kru3ep">
+                <dc:Bounds x="510" y="160" width="100" height="80" />
+                <bpmndi:BPMNLabel />
+                </bpmndi:BPMNShape>
+                <bpmndi:BPMNShape id="Activity_18om9gy_di" bpmnElement="Activity_18om9gy">
+                <dc:Bounds x="680" y="160" width="100" height="80" />
+                <bpmndi:BPMNLabel />
+                </bpmndi:BPMNShape>
+                <bpmndi:BPMNShape id="Event_11urpej_di" bpmnElement="Event_11urpej">
+                <dc:Bounds x="842" y="182" width="36" height="36" />
+                <bpmndi:BPMNLabel>
+                <dc:Bounds x="820" y="225" width="81" height="14" />
+                </bpmndi:BPMNLabel>
+                </bpmndi:BPMNShape>
+                </bpmndi:BPMNPlane>
+                </bpmndi:BPMNDiagram>
+                </bpmn:definitions>
+            `
+            bpmnModeler.importXML(xml);
+            bpmnModeler.get('canvas').zoom('fit-viewport');
+        </script>
+    </body>
+</html>
